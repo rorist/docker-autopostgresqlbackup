@@ -12,19 +12,19 @@
 PASSPHRASE=""
 if [ "${PASSWORD_SECRET}" ]; then
     if [ -f "/run/secrets/${PASSWORD_SECRET}" ]; then
-        PASSPHRASE = $(cat /run/secrets/${PASSWORD_SECRET})
+        PASSPHRASE=$(cat /run/secrets/${PASSWORD_SECRET})
     else
         echo "ERROR: Secret file not found in /run/secrets/${PASSWORD_SECRET}"
         echo "Please verify your docker secrets configuration."
         exit 1
     fi
 else
-    PASSPHRASE = ${PASSWORD}
+    PASSPHRASE=${PASSWORD}
 fi
 
 # Create the file
 cat <<-EOF > ${HOME}/.pgpass
-${DBHOST}:*:*:${USERNAME}:${PASSPHRASE}
+${DBHOST}:*:*:${USERNAME:-postgres}:${PASSPHRASE}
 EOF
 
 # Execute cron with parameters (autopostgresql script is under /etc/cron.daily)
