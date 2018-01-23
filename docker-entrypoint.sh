@@ -48,7 +48,7 @@ cat <<-EOF > ${HOME}/.pgpass
 ${DBHOST:-localhost}:*:*:${USERNAME:-postgres}:${PASSPHRASE}
 EOF
 # Permissions for this file shoudl be set to 0600
-chmod +x 0600 ${HOME}/.pgpass
+chmod 0600 ${HOME}/.pgpass
 
 # Execute cron with parameters (autopostgresql script is under /etc/cron.daily)
 echo "Execute cron service..."
