@@ -8,7 +8,7 @@ ENV LOG_LEVEL=8
 
 # Packages installation
 RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y autopostgresqlbackup cron bzip2 gzip && \
+    apt-get install -y autopostgresqlbackup cron bzip2 gzip postgresql-client && \
     apt-get purge -y --auto-remove && \
     rm -rf /var/lib/apt/lists/*
 
