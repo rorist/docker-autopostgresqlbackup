@@ -12,6 +12,9 @@ RUN apt-get update && apt-get upgrade -y && \
     apt-get purge -y --auto-remove && \
     rm -rf /var/lib/apt/lists/*
 
+# Copy files to the image
+ADD autopostgresqlbackup.conf /etc/default/autopostgresqlbackup
+
 # Configure entrypoint
 ADD docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
