@@ -5,6 +5,7 @@
 [![](https://dockerbuildbadges.quelltext.eu/status.svg?organization=ppadial&repository=autopostgresqlbackup)](https://hub.docker.com/r/ppadial/autopostgresqlbackup/builds/)
 
 This container follow the [dockerfile good practices](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/).
+
 ## Installation
 
 ```bash
@@ -25,8 +26,8 @@ Remember to map your /etc/localtime to the /etc/localtime of the container (good
 
 | NAME            | VALUES                                  | DEFAULT   | DESCRIPTION                                                                                                                                                                                                                                                                |
 | :-------------- | :-------------------------------------- | :-------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| CRON_LOG_LEVEL   | 1 to 8                                  | 8         | Level of verbosite. Most verbose is 0, less verbose is 8  |
-| CRON_SCHEDULE | a valid cron specification | empty | By default the app uses cron.daily schedule, but you can't crontrol the hour, so, is a ramdon momment during the day. If you want to schedule a fix time to run the backups define this environment variable with a valid cron_schedule. |
+| CRON_LOG_LEVEL  | 1 to 8                                  | 8         | Level of verbosite. Most verbose is 0, less verbose is 8                                                                                                                                                                                                                   |
+| CRON_SCHEDULE   | a valid cron specification              | empty     | By default the app uses cron.daily schedule, but you can't crontrol the hour, so, is a ramdon momment during the day. If you want to schedule a fix time to run the backups define this environment variable with a valid cron_schedule.                                   |
 | DBHOST          | hostname                                | localhost | name of the db host to connect.                                                                                                                                                                                                                                            |
 | USERNAME        | string                                  | postgres  | user used to connects to the db.                                                                                                                                                                                                                                           |
 | PASSWORD        | string                                  | empty     | password for the user to connects to the db. Remember doing this you have the password in an environment variable. If you prefer to use Docker Secrets (I recommend this) don't define this env var or leave it blank, and go to the PASSWORD_SECRET environment variable. |
@@ -84,7 +85,7 @@ services:
 
 Paulino Padial – [@ppadial](https://github.com/ppadial) – github.com/ppadial
 
-Distributed under the XYZ license. See [LICENSE](LICENSE) for more information.
+Distributed under the GPLv2 license. See [LICENSE](LICENSE) for more information.
 
 [https://github.com/ppadial/docker-autopostgresqlbackup](https://github.com/ppadial/)
 

@@ -14,6 +14,8 @@ RUN apt-get update && apt-get upgrade -y && \
 
 # Copy files to the image
 ADD autopostgresqlbackup.conf /etc/default/autopostgresqlbackup
+ADD autopostgresql /usr/sbin/autopostgresqlbackup
+RUN chmod 755 /usr/sbin/autopostgresqlbackup
 
 # Configure entrypoint
 ADD docker-entrypoint.sh /docker-entrypoint.sh
