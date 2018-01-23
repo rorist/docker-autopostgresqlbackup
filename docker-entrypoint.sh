@@ -8,9 +8,9 @@
 #           hostname:*:*:dbuser:dbpass
 # replace hostname with the value of DBHOST and postgres with
 # the value of USERNAME
-
 PASSPHRASE=""
 if [ "${PASSWORD_SECRET}" ]; then
+    echo "Using docker secrets..."
     if [ -f "/run/secrets/${PASSWORD_SECRET}" ]; then
         PASSPHRASE=$(cat /run/secrets/${PASSWORD_SECRET})
     else
@@ -19,13 +19,32 @@ if [ "${PASSWORD_SECRET}" ]; then
         exit 1
     fi
 else
+    echo "Using environment password..."
     PASSPHRASE=${PASSWORD}
 fi
 
+# Logic for the CRON schedule
+#  If CRON_SCHEDULE is defined, delete the script under cron.daily and copy this one to crontab
+#  If CRON_SCHEDULE is not defined, don't do anything, use default cron.daily behaviour
+if [ "${CRON_SCHEDULE}" ]; then
+  echo "Configuring a CUSTOM SCHEDULE in /etc/crontab for ${CRON_SCHEDULE} ..."
+    # Create the crontab file
+    cat <<-EOF > /etc/crontab
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+# m h dom mon dow user command
+${CRON_SCHEDULE} /usr/sbin/autopostgresqlbackup
+EOF    
+  # the file should have the correct content
+fi
+
 # Create the file
+echo "Creating the password file..."
 cat <<-EOF > ${HOME}/.pgpass
 ${DBHOST}:*:*:${USERNAME:-postgres}:${PASSPHRASE}
 EOF
 
 # Execute cron with parameters (autopostgresql script is under /etc/cron.daily)
-exec cron -f -l ${LOG_LEVEL:-8}
+echo "Execute cron service..."
+exec cron -f -l ${CRON_LOG_LEVEL:-8}
