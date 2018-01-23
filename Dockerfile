@@ -17,7 +17,7 @@ ADD docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
 # Volumes declaration
-VOLUME ["/backup", "/scripts"]
+VOLUME ["/backup"]
 
 # Start the container process
 ENTRYPOINT ["/docker-entrypoint.sh"]
