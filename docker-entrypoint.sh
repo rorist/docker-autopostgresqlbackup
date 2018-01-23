@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Logic for Password file required
 #  If PASSWORD_SECRET env var is defined, search for the /run/secrets/${PASSWORD_SECRET} and read the content
@@ -29,20 +29,23 @@ fi
 if [ "${CRON_SCHEDULE}" ]; then
   echo "Configuring a CUSTOM SCHEDULE in /etc/crontab for ${CRON_SCHEDULE} ..."
     # Create the crontab file
-    cat <<-EOF > /etc/crontab
+cat <<-EOF > /etc/crontab
+
 SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
 # m h dom mon dow user command
-${CRON_SCHEDULE} /usr/sbin/autopostgresqlbackup
-EOF    
-  # the file should have the correct content
+${CRON_SCHEDULE} /usr/sbin/autopostgresqlbackup    
+EOF
+else
+    echo "Using cron.daily schedule..."
 fi
 
 # Create the file
 echo "Creating the password file..."
 cat <<-EOF > ${HOME}/.pgpass
-${DBHOST}:*:*:${USERNAME:-postgres}:${PASSPHRASE}
+
+${DBHOST:-localhost}:*:*:${USERNAME:-postgres}:${PASSPHRASE}
 EOF
 
 # Execute cron with parameters (autopostgresql script is under /etc/cron.daily)
