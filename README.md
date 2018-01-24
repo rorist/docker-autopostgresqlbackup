@@ -4,6 +4,8 @@
 
 [![](https://dockerbuildbadges.quelltext.eu/status.svg?organization=ppadial&repository=autopostgresqlbackup)](https://hub.docker.com/r/ppadial/autopostgresqlbackup/builds/)
 
+This docker container uses the autopostgresqlbackup package from ubuntu repos with a minimal modification to make it able to use variables from environment variables, making the configuration through docker model possible. The original source code with modifications is in this repo, also the license GPLv2 has been respected and this repo is under GPLv2.
+
 This container follow the [dockerfile good practices](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/).
 
 ## Installation
