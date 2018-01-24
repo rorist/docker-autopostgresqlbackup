@@ -4,7 +4,7 @@ FROM ubuntu:latest
 LABEL maintainer="Paulino Padial <github.com/ppadial>"
 
 # Environment variables (with default values)
-ENV LOG_LEVEL=8
+ENV CRON_LOG_LEVEL=8
 
 # Packages installation
 RUN apt-get update && apt-get upgrade -y && \
