@@ -14,7 +14,7 @@ RUN apt-get update && apt-get upgrade -y && \
 
 # Copy files to the image
 ADD autopostgresqlbackup.conf /etc/default/autopostgresqlbackup
-ADD autopostgresql /usr/sbin/autopostgresqlbackup
+ADD autopostgresqlbackup /usr/sbin/autopostgresqlbackup
 RUN chmod 755 /usr/sbin/autopostgresqlbackup
 
 # Configure entrypoint
