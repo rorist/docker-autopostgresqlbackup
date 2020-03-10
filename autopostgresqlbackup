@@ -150,6 +150,7 @@ function load_default_config() {
 # ====================================================================
 # Load config file Logic
 # ====================================================================
+source /env.sh
 if [ -f /etc/default/autopostgresqlbackup ]; then
 	. /etc/default/autopostgresqlbackup
 else

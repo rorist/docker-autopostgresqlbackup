@@ -50,6 +50,9 @@ EOF
 # Permissions for this file shoudl be set to 0600
 chmod 0600 ${HOME}/.pgpass
 
+# Save the environment as cron doesn't propagate it anymore
+env > /env.sh
+
 # Execute cron with parameters (autopostgresql script is under /etc/cron.daily)
 echo "Execute cron service..."
 exec cron -f -l ${CRON_LOG_LEVEL:-8}
