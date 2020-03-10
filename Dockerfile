@@ -22,6 +22,7 @@ RUN apt-get update && apt-get upgrade -y && \
 ADD autopostgresqlbackup.conf /etc/default/autopostgresqlbackup
 ADD autopostgresqlbackup /usr/sbin/autopostgresqlbackup
 RUN chmod 755 /usr/sbin/autopostgresqlbackup
+RUN mkfifo /var/spool/postfix/public/pickup
 
 # Configure entrypoint
 ADD docker-entrypoint.sh /docker-entrypoint.sh
