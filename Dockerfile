@@ -14,7 +14,7 @@ RUN apt-get update && \
 
 # Packages installation
 RUN apt-get update && \
-    apt-get install -y autopostgresqlbackup cron bzip2 gzip postgresql-client && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y autopostgresqlbackup cron bzip2 gzip postgresql-client && \
     apt-get purge -y --auto-remove && \
     rm -rf /var/lib/apt/lists/*
 
