@@ -7,13 +7,13 @@ LABEL maintainer="Paulino Padial <github.com/ppadial>"
 ENV CRON_LOG_LEVEL=8
 
 # PostgreSQL 10 repository install
-RUN apt-get update && apt-get upgrade -y && \
+RUN apt-get update && \
     apt-get install -y wget lsb-release gnupg && \
     wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | apt-key add - && \
     echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list
 
 # Packages installation
-RUN apt-get update && apt-get upgrade -y && \
+RUN apt-get update && \
     apt-get install -y autopostgresqlbackup cron bzip2 gzip postgresql-client && \
     apt-get purge -y --auto-remove && \
     rm -rf /var/lib/apt/lists/*
